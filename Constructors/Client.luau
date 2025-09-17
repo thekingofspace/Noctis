@@ -39,6 +39,7 @@ function module.new(Token:string, Intents:{number})
     end
 
     function self:Start()
+        token = token
         if self._alive == true then
             return
         end
@@ -73,6 +74,14 @@ function module.new(Token:string, Intents:{number})
                 if Packet.t then
                     local Cache = CachedSignals[Packet.t] or CachedSignals[Packet.t:lower()]
 
+                    if debugmode == true and not Cache then
+                        print(Packet.t)
+
+                        if spit ~= nil and table.find(spit, Packet.t) then
+                            print(Packet.d)
+                        end
+                    end
+
                     if Cache then
                         Cache.Signal:Fire(Packet.d)
                     end
@@ -104,6 +113,7 @@ function module.new(Token:string, Intents:{number})
         end
         self._alive = false
         self:_KillThread()
+        token = ""
     end
 
     self.__index = self

@@ -1,5 +1,7 @@
 local Event = {}
 
+local types = require("../../types")
+
 Event.Register = function(signal)
     Event.Signal = signal
 end -- added register here so that way I can make event constructors.

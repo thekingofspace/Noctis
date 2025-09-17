@@ -9,7 +9,9 @@ MainPath:gsub([[\]], "/")
 fs.readDir(MainPath .. "/storage")
 
 type Events = {
-    heartbeat:types.ReadOnlySignal<number>
+    heartbeat:types.ReadOnlySignal<number>;
+    ready:types.ReadOnlySignal<types.DiscordUser>;
+    typing_started:types.ReadOnlySignal<{channel_id:string, timestamp:number, user_id:string}>
 }
 
 for I, item in ipairs(fs.readDir(MainPath .. "/storage")) do
