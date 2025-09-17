@@ -19,7 +19,6 @@ function module.new(Token:string, Intents:{number})
 
     self._lastSequence = 0
 
-    self._socket = net.socket(gate)
     self._heartbeat = 0
 
     self._threads = {}
@@ -43,6 +42,9 @@ function module.new(Token:string, Intents:{number})
         if self._alive == true then
             return
         end
+
+        self._socket = net.socket(gate)
+
         self._alive = true
         local Identifier = {
             op = 2;
@@ -112,8 +114,14 @@ function module.new(Token:string, Intents:{number})
             return
         end
         self._alive = false
+        self._socket:close()
+        self._socket = nil
         self:_KillThread()
         token = ""
+
+        if CachedSignals["stopped"] then
+            CachedSignals["stopped"].Signal:Fire(os.time() - self.StartTime)
+        end
     end
 
     self.__index = self

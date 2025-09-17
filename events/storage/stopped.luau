@@ -4,10 +4,10 @@ local types = require("../../types")
 
 Event.Register = function(signal:types.Signal)
     Event.Signal = signal
-end -- added register here so that way I can make event constructors.
+end
 
 Event.Signal = nil
 
-Event.ActiveID = "heartbeat"
+Event.ActiveID = "stopped"
 
 return Event
