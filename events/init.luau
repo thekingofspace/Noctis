@@ -12,7 +12,8 @@ type Events = {
     heartbeat:types.ReadOnlySignal<number>;
     ready:types.ReadOnlySignal<types.DiscordUser>;
     typing_started:types.ReadOnlySignal<{channel_id:string, timestamp:number, user_id:string}>;
-    stopped:types.ReadOnlySignal<>
+    stopped:types.ReadOnlySignal<>;
+    message_create:types.ReadOnlySignal<types.MessageGate>
 }
 
 for I, item in ipairs(fs.readDir(MainPath .. "/storage")) do
